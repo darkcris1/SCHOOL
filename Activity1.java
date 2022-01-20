@@ -1,4 +1,4 @@
-class Intro {
+class Activity1 {
     public static void main(String args[]) {
         System.out.println("* Name: Cris T. Fandiño Jr. *");     
         System.out.println("* Age: 19 *");     
