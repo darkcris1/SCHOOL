@@ -76,7 +76,7 @@ public class Midterm {
 
         Scanner s = new Scanner(System.in);
 
-        int given, limit;
+        float given, limit;
 
         System.out.print("Enter a number: ");
         given = s.nextInt();
@@ -97,7 +97,7 @@ public class Midterm {
         for (int i = 1; i <= limit; i++) {
             switch (operation) {
                 case 1:
-                    System.out.println(given + " x " + i + " = " + (given + i) );
+                    System.out.println(given + " + " + i + " = " + (given + i) );
                     break;
                 case 2:
                     System.out.println(given + " - " + i + " = " + (given - i) );
@@ -106,7 +106,7 @@ public class Midterm {
                     System.out.println(given + " * " + i + " = " + (given * i) );
                     break;
                 case 4:
-                    System.out.println(given + " * " + i + " = " + (given / i) );
+                    System.out.println(given + " / " + i + " = " + (given / i) );
                     break;
             }
         }
@@ -154,7 +154,7 @@ public class Midterm {
         int choosen = s.nextInt();
 
         System.out.println();
-        
+
         switch (choosen) {
             case 1:
                 runDataTypes();
