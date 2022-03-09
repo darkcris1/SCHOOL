@@ -6,8 +6,6 @@ int float_asker(string question){
     cout << question;
     cin >> number;
     return number;
-
-    // Hello world
 }
 
 int main(){
