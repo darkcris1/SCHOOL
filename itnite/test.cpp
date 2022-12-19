@@ -26,8 +26,10 @@ int main() {
       {"user", "user456"},
       {"itnite", "ITNite"},
   };
+
   int index = -1; // initial value if invalid credentials
-  for (int i = 0; i < sizeof(credentials); i++) {
+
+  for (int i = 0; i < 3; i++) { // change the 3 or use sizeof() if the array was change 
     if (credentials[i][0] == username) {
       index = i;
       break;
