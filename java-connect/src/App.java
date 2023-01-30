@@ -1,38 +1,47 @@
 import java.sql.*;
+import java.util.Scanner;
 
 
 //  https://www.geeksforgeeks.org/java-database-connectivity-with-mysql/
 public class App {
+
     public static void main(String[] args) throws Exception {
         Connection connection = null;
+        Scanner sc = new Scanner(System.in);
+        
+        int select;
+
         try {
             // below two lines are used for connectivity.
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/university",
+                "jdbc:mysql://localhost/school",
                 "root", "");
- 
-            // mydb is database
-            // mydbuser is name of database
-            // mydbuser is password of database
  
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet;
-            resultSet = statement.executeQuery(
-                "select * from student");
-            String name;
-            String cl;
-            while (resultSet.next()) {
 
-                System.out.println("-------------------------");
-                name = resultSet.getString("name");
-                cl = resultSet.getString("class");
-                System.out.println( "Student Number: " + resultSet.getInt("student_number")
-                                    +"\nName: " + name
-                                   + "\nClass: " + cl);
+            System.out.println("Options ");
+            System.out.println("1. Add Student ");
+            System.out.print("Select an action: ");
+            select = sc.nextInt();
+
+            switch (select) {
+                case 1:
+                    System.out.print("Enter student name: ");
+                    sc.nextLine();
+                    String name = sc.nextLine();
+                    System.out.print("Enter student age: ");
+                    int age = sc.nextInt();
+
+                    statement.executeUpdate("INSERT INTO `student` (`name`, `age`) VALUES ('" + name + "', '" +  age + "')");
+
+                    System.out.println("You successfully added the student ");
+                    break;
+                case 2:
+                    break;
             }
-            resultSet.close();
+
             statement.close();
             connection.close();
         }
@@ -40,5 +49,6 @@ public class App {
             System.out.println(exception);
         }
 
+        sc.close();
     }
 }
