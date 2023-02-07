@@ -1,6 +1,6 @@
 import java.sql.*;
 
-// Create database class ro reuse the connection
+// Create database class to reuse the connection
 class Database {
     Connection connection = null;
     Statement statement;
