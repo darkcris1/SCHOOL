@@ -13,7 +13,7 @@ class User {
                 this.name = result.getString("name");
                 this.money = result.getFloat("money");
             } else {
-                Main.db.update("INSERT INTO `user` (`name`, `money`) VALUES (' " + this.name + "','" + this.money + "')");
+                Main.db.update("INSERT INTO `user` (`name`, `money`) VALUES ('" + this.name.toLowerCase() + "','" + this.money + "')");
             }
         } catch (Exception e) {
             System.out.println(e);
