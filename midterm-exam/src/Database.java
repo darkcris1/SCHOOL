@@ -4,8 +4,11 @@ import java.sql.*;
 class Database {
     Connection connection = null;
     Statement statement;
-    String dbName = "cris_exam";
 
+    String dbName = "cris_exam";
+    String url = "jdbc:mysql://localhost/";
+    String user = "root";
+    String password = "";
 
     private void msgIfNoConnection(){
         if (this.connection == null) {
@@ -18,8 +21,8 @@ class Database {
             //  https://www.geeksforgeeks.org/java-database-connectivity-with-mysql/
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/" + this.dbName,
-                "root", "");
+                this.url + this.dbName,
+                this.user, this.password);
         }catch (Exception exception) {
             System.out.println(exception);
         }
