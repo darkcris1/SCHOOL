@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goergine</title>
+
+    <style>
+        :root {
+            --default-border: 1px solid hsl(49, 100%, 25%);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            border: var(--default-border);
+            justify-content: space-between;
+            gap: 20px;
+            height: 60px;
+            padding: 0 10px;
+        }
+        .header span {
+            padding: 10px;
+            border: var(--default-border);
+        }
+        .header-2 {
+            padding: 20px;
+            border: var(--default-border);
+            margin: 10px 0;
+        }
+
+        .header-3 {
+            height: 40px;
+            border: var(--default-border);
+            margin: 10px 0;
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+
+        .content > div {
+            height: 500px;
+            flex-grow: 1;
+            border: var(--default-border);
+        }
+        .content > div:nth-child(1) {
+            flex-grow: 1.75;
+        }
+        footer {
+            border: var(--default-border);
+            margin: 10px 0;
+            width: 100%;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <span>Logo</span>
+            <span>Link 1</span>
+            <span>Link 1</span>
+            <span>Link 1</span>
+            <span>Link 1</span>
+        </div>
+        <span>
+            <input style="margin-left: auto; visibility: hidden;" />
+        </span>
+    </div>
+
+    <div class="header-2">
+        <span>Products</span>
+    </div>
+    <div class="header-3">
+
+    </div>
+    <div class="content">
+        <div>
+            <div></div>
+        </div>        
+        <div></div>        
+    </div>
+    <footer></footer>
+</body>
+</html>
