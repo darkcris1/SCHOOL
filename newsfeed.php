@@ -1,6 +1,6 @@
 
 <?php
-    session_start();
+    include 'commons/required_login.php';
 ?>
 
 <!DOCTYPE html>

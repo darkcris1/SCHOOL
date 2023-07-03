@@ -1,3 +1,8 @@
+<?php 
+session_start();
+?>
+
+
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" id='navbar'>
   <div class="container-fluid">
     <a class="navbar-brand" href="/index.php">SocialMedyas</a>
@@ -13,12 +18,17 @@
         <li class="nav-item">
           <a class="nav-link" href="/about.php">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login.php">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/register.php">Register</a>
-        </li>
+
+        <?php 
+          if (!$_SESSION['isAuth']) {
+        ?>
+          <li class="nav-item">
+            <a class="nav-link" href="/login.php">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register.php">Register</a>
+          </li>
+        <?php } ?>
       </ul>
     </div>
   </div>
