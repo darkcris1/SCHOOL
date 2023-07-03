@@ -1,0 +1,25 @@
+main {
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+main figure{
+    width: 100%;
+    min-width: 300px;
+    max-width: 100%;
+}
+
+main article {
+    display: flex;    
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+}
