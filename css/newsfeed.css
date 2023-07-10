@@ -49,6 +49,7 @@ body{margin-top:20px;}
 .social-avatar img {
   height: 40px;
   width: 40px;
+  border-radius: 50%;
   margin-right: 10px;
 }
 .social-avatar .media-body a {

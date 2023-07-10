@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["email"] = $row['email'];
                 $_SESSION["first_name"] = $row['first_name'];
                 $_SESSION["last_name"] = $row['last_name'];
-                $_SESSION["displayName"] =  $row['first_name'] . ' ' . $row['last_name'];
-                $_SESSION["isAuth"] =  true;
+                $_SESSION["displayName"] = $row['first_name'] . ' ' . $row['last_name'];
+                $_SESSION["isAuth"] = true;
                 header("Location: newsfeed.php");
                 exit();
             } else {
