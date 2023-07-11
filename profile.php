@@ -23,11 +23,6 @@ $user = $result->fetch_assoc();
     <nav class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark" id='navbar'>
         <div class="container-fluid">
             <a class="navbar-brand" href="/newsfeed.php">SocialMedyas</a>
-            <div class="flex-grow-1 d-flex align-center justify-content-center">
-                <button data-bs-toggle="modal" data-bs-target="#postModal" class="btn btn-secondary mx-auto">
-                    Create post
-                </button>
-            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,6 +37,7 @@ $user = $result->fetch_assoc();
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/profile.php?user=<?= $_SESSION['id'] ?>">Profile</a>
+                            <a class="dropdown-item" href="/contact.php">Contact</a>
                             <a class="dropdown-item" href="/logout.php">Logout</a>
                         </div>
                     </li>
@@ -56,7 +52,7 @@ $user = $result->fetch_assoc();
                 <div style="width: 150px;" class="mx-auto">
                     <img class="rounded-circle" src="/uploads/<?= $user['photo'] ?>" width="150" height="150" alt="">
                 </div>
-                <h2><?= $_SESSION['first_name'] ?> <?= $_SESSION['last_name'] ?></h2>
+                <h2><?= $user['first_name'] ?> <?= $user['last_name'] ?></h2>
             </div>
         </div>
     </div>

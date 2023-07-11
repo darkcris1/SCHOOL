@@ -17,9 +17,7 @@ include 'commons/required_login.php';
         <div class="container-fluid">
             <a class="navbar-brand" href="/newsfeed.php">SocialMedyas</a>
             <div class="flex-grow-1 d-flex align-center justify-content-center">
-                <button data-bs-toggle="modal" data-bs-target="#postModal" class="btn btn-secondary mx-auto">
-                    Create post
-                </button>
+             
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +33,7 @@ include 'commons/required_login.php';
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/profile.php?user=<?= $_SESSION['id'] ?>">Profile</a>
+                            <a class="dropdown-item" href="/contact.php">Contact</a>
                             <a class="dropdown-item" href="/logout.php">Logout</a>
                         </div>
                     </li>
@@ -45,6 +44,24 @@ include 'commons/required_login.php';
 
     <div class="container py-5">
         <div class="col-md-6 mx-auto mt-3 py-5">
+            <div 
+                class="pb-2 d-flex gap-3 justify-content-between align-items-center">
+                <div>
+                    <select 
+                        @change="filterChange"
+                        class="form-select">
+                        <option value="" selected>All</option>
+                        <option value="1">Promotion</option>
+                        <option value="2">Entertainment</option>
+                    </select>
+                </div>
+                <div>
+                    <button data-bs-toggle="modal" data-bs-target="#postModal" class="btn btn-primary mx-auto">
+                        Post
+                        <i class="far fa-edit ms-2"></i> 
+                    </button>
+                </div>
+            </div>
             <template x-for="post in data">  
                 <div 
                     class="social-feed-box">
@@ -54,14 +71,18 @@ include 'commons/required_login.php';
                                 <i class="fa fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <button class="dropdown-item">Edit</button>
+                                <button 
+                                    data-bs-target="#editPostModal"
+                                    data-bs-toggle="modal" 
+                                    @click="selectedPost = post"
+                                    class="dropdown-item">Edit</button>
                             </ul>
                         </div>
                     </template>
                     <div class="social-avatar">
                         <a href="" class="pull-left">
                             <img 
-                                alt="image" :src="'uploads/profile/' + post.user.photo">
+                                alt="image" :src="'uploads/' + post.user.photo">
                         </a>
                         <div class="media-body">
                             <a :href="'profile.php?user=' + post.user.id">
@@ -69,6 +90,16 @@ include 'commons/required_login.php';
                                 <span x-text="post.user.last_name"></span>
                             </a>
                             <small class="text-muted" x-text="post.created_at">Today 4:21 pm - 12.06.2014</small>
+                            <template x-if="post.type == 1">
+                                <div class="badge bg-primary d-inline-block">
+                                    Promotions
+                                </div>
+                            </template>
+                            <template x-if="post.type == 2">
+                                <div class="badge bg-primary d-inline-block">
+                                    Entertainment
+                                </div>
+                            </template>
                         </div>
                     </div>
                     <div class="social-body">
@@ -97,7 +128,71 @@ include 'commons/required_login.php';
 
         </div>
     </div>
+        <!-- Edit post -->
+    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Post</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <template x-if="selectedPost">
+                        <form 
+                            @submit.prevent="editPost">
+                            <div x-data="imageViewer()" class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Image:</label>
+                                <template x-if="imageUrl || selectedPost.image">
+                                    <div>
+                                        <img :src="imageUrl || 'uploads/' +selectedPost.image" class="object-cover rounded border"
+                                            style="width: 100px; height: 100px;">
+                                    </div>
+                                </template>
+                                <input type="file" name="image" class="mt-3 form-control" accept="image/*"
+                                    @change="fileChosen" id="recipient-name">
+                            </div>
+                            <input 
+                                required 
+                                type="hidden"
+                                :value="selectedPost.id"
+                                name="post_id" class="form-control" id="message-text"></input>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Caption:</label>
+                                <textarea 
+                                    :value="selectedPost.caption"
+                                    required name="caption" class="form-control" id="message-text"></textarea>
+                            </div>
+                            <div class="mb-3 d-flex gap-3">
+                                <div class="form-check">
+                                    <input 
+                                        class="form-check-input" required type="radio" name="type" id="flexRadioDefault1" value="1" :checked="selectedPost.type == 1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Promotion
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" required type="radio" name="type" value="2" id="flexRadioDefault2" :checked="selectedPost.type == 2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Entertainment
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button 
+                                    x-ref="cancelUpdate"
+                                    type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button 
+                                    x-bind:disabled="isPosting"
+                                    type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Create post -->
     <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -122,6 +217,20 @@ include 'commons/required_login.php';
                             <label for="message-text" class="col-form-label">Caption:</label>
                             <textarea required name="caption" class="form-control" id="message-text"></textarea>
                         </div>
+                        <div class="mb-3 d-flex gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" required type="radio" name="type" value="1" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Promotion
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" required type="radio" name="type" value="2" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Entertainment
+                                </label>
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button 
                                 x-ref="cancel"
@@ -141,6 +250,32 @@ include 'commons/required_login.php';
             return {
                 user: <?= $_SESSION['id'] ?>,
                 data: [],
+                type: '',
+                selectedPost: null,
+                editPost(e){
+                    const data = new FormData(e.target)
+                    const image = data.get('image')
+                    if (image.size === 0) {
+                        data.delete('image')
+                    }
+                    axios.post('update_post.php', data).then((res) => {
+                        Object.assign(this.selectedPost, res)                        
+                        this.init()
+                        this.$refs.cancelUpdate.click()
+                    }).catch(()=>{
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Error upon posting',
+                            icon: 'error',
+                        })
+                    }).finally(()=>{
+                        this.isPosting = false;
+                    })
+                },
+                filterChange(e){
+                    this.type = e.target.value
+                    this.fetchPost()
+                },
                 isPosting: false,
                 likePost(post){
                     axios.get(`like_post.php?post=${post.id}`).then((res) => {
@@ -157,7 +292,7 @@ include 'commons/required_login.php';
                     this.fetchPost()
                 },
                 fetchPost(){
-                    axios.get('post.php').then((res) => {
+                    axios.get(`post.php?type=${this.type}`).then((res) => {
                         this.data = res.data.data 
                         this.$refs.cancel.click()
                     })
@@ -167,7 +302,14 @@ include 'commons/required_login.php';
                     const data = new FormData(e.target)
                     axios.post('post.php', data).then((res) => {
                         this.init()
-                    }).finally(()=>{
+                    }).catch(()=>{
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Error upon posting',
+                            icon: 'error',
+                        })
+                    })
+                    .finally(()=>{
                         this.isPosting = false;
                     })
                 },

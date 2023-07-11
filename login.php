@@ -48,7 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["last_name"] = $row['last_name'];
                 $_SESSION["displayName"] = $row['first_name'] . ' ' . $row['last_name'];
                 $_SESSION["isAuth"] = true;
-                header("Location: newsfeed.php");
+                $_SESSION["isAdmin"] = !!$row['is_admin'];
+
+                if ($_SESSION["isAdmin"]) {
+                    header("Location: admin.php");
+                } else {
+                    header("Location: newsfeed.php");
+                }
                 exit();
             } else {
                 $firstError = "Invalid username or password.";

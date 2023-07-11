@@ -6,6 +6,27 @@ $firstError = null;
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // File details
+    $targetDir = 'uploads/';
+    $fileName = basename($_FILES["photo"]["name"]);
+    $targetFilePath = $targetDir . $fileName;
+    $imageFileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+
+    // Check file size
+    if ($_FILES["photo"]["size"] > 5000000) {
+        $firstError = "Sorry, the file was too large";
+        return;
+    }
+
+    // Allow certain file formats
+    if (
+        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif"
+    ) {
+        // File upload error
+        $firstError = "Post accepts only jpg, png, jpeg or gif";
+        return;
+    }
     // Assuming you have received POST data
     $data = $_POST;
 
@@ -23,9 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // echo json_encode($asd);
     // echo json_encode($data);
     // echo json_encode($err);
-
     // Check if the data is valid
-    if ($validator->isValid()) {
+    if ($validator->isValid() && move_uploaded_file($_FILES["photo"]["tmp_name"], $targetFilePath)) {
         // Data is valid, proceed with further processing
         // Example: Insert the data into the database
         $firstName = $data['first_name'];
@@ -36,9 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Perform database insert or other actions
         // Prepare an insert statement
         // Prepare the SQL insert statement
-        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, photo) VALUES (?, ?, ?, ?, ?)");
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
+        $stmt->bind_param("sssss", $firstName, $lastName, $email, $password, $fileName);
 
         // Execute the insert statement
         if ($stmt->execute()) {
@@ -89,7 +109,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include 'components/header.php' ?>
     <main class="form-signin w-100 m-auto">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form 
+            x-data="imageViewer"
+            action="" method="POST" enctype="multipart/form-data">
             <h1 class="h3 mb-3 fw-normal">Register</h1>
             <?php if ($firstError): ?>
                 <div class="alert alert-danger">
@@ -100,6 +122,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php endif; ?>
 
 
+            <template x-if="imageUrl">
+                <div class="d-flex align-items-center justify-content-center">
+                    <img :src="imageUrl" class="object-cover rounded-circle border"
+                        style="width: 100px; height: 100px;">
+                </div>
+            </template>
+            <div 
+                class="form-floating">
+                <input 
+                    type="file" 
+                    accept="image/png,image/jpg,image/jpeg,image/webp"
+                    name="photo" 
+                    @change="fileChosen"
+                    class="form-control" id="floatingInput" placeholder="Juan">
+                <label for="floatingInput">Photo</label>
+            </div>
             <div class="form-floating">
                 <input 
                     value="<?php echo $data['first_name']?>"
@@ -130,6 +168,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </main>
 
+    <script>
+        function imageViewer() {
+            return {
+                imageUrl: '',
+                fileChosen(event) {
+                    this.fileToDataUrl(event, src => this.imageUrl = src)
+                },
+                fileToDataUrl(event, callback) {
+                    if (!event.target.files.length) return
+
+                    let file = event.target.files[0],
+                        reader = new FileReader()
+                    reader.readAsDataURL(file)
+                    reader.onload = e => callback(e.target.result)
+                },
+            }
+        }
+    </script>
 </body>
 
 </html>

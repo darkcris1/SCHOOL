@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fileName = basename($_FILES["image"]["name"]);
     $targetFilePath = $targetDir . $fileName;
     $caption = $_POST["caption"];
+    $type = $_POST["type"];
     $imageFileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
 
     // Check file size
@@ -53,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insert file details into the database
         $user_id = $_SESSION['id'];
-        $sql = "INSERT INTO posts (image, caption, user) VALUES ('$fileName', '$caption','$user_id')";
+        $sql = "INSERT INTO posts (image, caption, user, type) VALUES ('$fileName', '$caption','$user_id', '$type')";
 
         if ($conn->query($sql) === true) {
             $response["database"] = "File details saved in the database.";
@@ -77,15 +78,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
 
     $user_id = $_SESSION['id'];
-    // Fetch data from the "post" table with user details
-    $sql = "SELECT p.*, u.id AS user_id, u.first_name, u.last_name, u.photo,
+$post_type = $_GET['type'] ?? ''; // Using the null coalescing operator to set an empty string as the default value if 'type' parameter is not provided
+
+// Fetch data from the "post" table with user details and filter by post type if not empty
+$sql = "SELECT p.*, u.id AS user_id, u.first_name, u.last_name, u.photo,
     (SELECT COUNT(*) FROM posts_reacts WHERE post = p.id) AS likes_count,
     (SELECT COUNT(*) FROM posts_reacts WHERE post = p.id AND user = '$user_id') AS is_liked
     FROM posts p
-    INNER JOIN users u ON p.user = u.id
-    ORDER BY p.updated_at DESC";
-    $result = $conn->query($sql);
+    INNER JOIN users u ON p.user = u.id";
 
+if (!empty($post_type)) {
+    $sql .= " WHERE p.type = '$post_type'";
+}
+
+$sql .= " ORDER BY p.updated_at DESC";
+
+    $result = $conn->query($sql);
     if ($result) {
         $posts = [];
 
