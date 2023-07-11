@@ -1,5 +1,8 @@
 # Setup 
 
+Demo
+- 
+
 ## To run this locally
 
 > **NOTE:** the htdocs folder should be **empty**
@@ -10,6 +13,6 @@
 git clone https://github.com/darkcris1/SCHOOL.git .
 ```
 
-- or download the zip file in unzip the files insize the htdocs
+- or download the zip file in unzip the files inside the htdocs
 
 
