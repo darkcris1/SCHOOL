@@ -114,12 +114,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php endif; ?>
 
             <div class="form-floating">
-                <input value="<?= $data['email'] ?>" type="email" name="email" class="form-control" id="floatingInput"
+                <input required value="<?= $data['email'] ?>" type="email" name="email" class="form-control" id="floatingInput"
                     placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" name="password" class="form-control" id="floatingPassword"
+                <input required type="password" name="password" class="form-control" id="floatingPassword"
                     placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>

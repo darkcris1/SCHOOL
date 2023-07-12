@@ -133,6 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input 
                     type="file" 
                     accept="image/png,image/jpg,image/jpeg,image/webp"
+                    required
                     name="photo" 
                     @change="fileChosen"
                     class="form-control" id="floatingInput" placeholder="Juan">
@@ -141,12 +142,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-floating">
                 <input 
                     value="<?php echo $data['first_name']?>"
+                    required
                     type="text" name="first_name" class="form-control" id="floatingInput" placeholder="Juan">
                 <label for="floatingInput">First Name</label>
             </div>
             <div class="form-floating">
                 <input 
                     value="<?php echo $data['last_name']?>"
+                    required
                     type="last_name" name="last_name" class="form-control" id="floatingInput"
                     placeholder="Dela Cruz">
                 <label for="floatingInput">Last Name</label>
@@ -155,11 +158,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-floating">
                 <input 
                     value="<?php echo $data['email']?>"
+                    required
                     type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
                 <input 
+                    required
                     type="password" class="form-control" name="password" id="floatingPassword"
                     placeholder="Password">
                 <label for="floatingPassword">Password</label>
