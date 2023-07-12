@@ -10,6 +10,7 @@ include 'commons/required_login.php';
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/newsfeed.css">
     <title>Newsfeed</title>
+    <script src="https://unpkg.com/share-api-polyfill/dist/share-min.js"></script>
 </head>
 
 <body x-data="Post()">
@@ -64,6 +65,7 @@ include 'commons/required_login.php';
             </div>
             <template x-for="post in data">  
                 <div 
+                    :id="'post-' + post.id"
                     class="social-feed-box">
                     <template x-if="user == post.user.id">
                         <div class="social-action dropdown">
@@ -120,7 +122,9 @@ include 'commons/required_login.php';
                                     class="fa-heart me-1"></i> 
                                 <span x-text="post.likes_count"></span>
                             </button>
-                            <button class="btn btn-white btn-xs"><i class="far fa-share me-1"></i></button>
+                            <button 
+                                @click="sharePost(post)"
+                                class="btn btn-white btn-xs"><i class="far fa-share me-1"></i></button>
                         </div>
                     </div>
                 </div>
@@ -252,6 +256,15 @@ include 'commons/required_login.php';
                 data: [],
                 type: '',
                 selectedPost: null,
+                sharePost(post){
+                    navigator.share({
+                        title: 'Share post',
+                        text: `${post.caption}`,
+                        url: location.origin + location.pathname + `#${post.id}`
+                    })
+                    .then( _ => console.log('Yay, you shared it :)'))
+                    .catch( error => console.log('Oh noh! You couldn\'t share it! :\'(\n', error));
+                },
                 editPost(e){
                     const data = new FormData(e.target)
                     const image = data.get('image')
@@ -260,7 +273,7 @@ include 'commons/required_login.php';
                     }
                     axios.post('update_post.php', data).then((res) => {
                         Object.assign(this.selectedPost, res)                        
-                        this.init()
+                        this.init(false)
                         this.$refs.cancelUpdate.click()
                     }).catch(()=>{
                         Swal.fire({
@@ -288,11 +301,19 @@ include 'commons/required_login.php';
                         }
                     })
                 },
-                init() {
-                    this.fetchPost()
+                init(isInitial=true) {
+                    this.fetchPost().then(()=>{
+                        if (isInitial) {
+                            setTimeout(() => {
+                                const el = document.querySelector(location.hash.replace('#','#post-'))
+                                el?.scrollIntoView()
+                            }, 200);
+                        }
+                    });
+
                 },
                 fetchPost(){
-                    axios.get(`post.php?type=${this.type}`).then((res) => {
+                    return axios.get(`post.php?type=${this.type}`).then((res) => {
                         this.data = res.data.data 
                         this.$refs.cancel.click()
                     })
@@ -301,7 +322,7 @@ include 'commons/required_login.php';
                     this.isPosting = true;
                     const data = new FormData(e.target)
                     axios.post('post.php', data).then((res) => {
-                        this.init()
+                        this.init(false)
                     }).catch(()=>{
                         Swal.fire({
                             title: 'Error!',
