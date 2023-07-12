@@ -305,7 +305,9 @@ include 'commons/required_login.php';
                     this.fetchPost().then(()=>{
                         if (isInitial) {
                             setTimeout(() => {
-                                const el = document.querySelector(location.hash.replace('#','#post-'))
+                                const selector = location.hash.replace('#','#post-')
+                                if (!selector) return
+                                const el = document.querySelector(selector)
                                 el?.scrollIntoView()
                             }, 200);
                         }
