@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main class="form-signin w-100 m-auto">
         <form 
             x-data="imageViewer"
-            action="" method="POST" enctype="multipart/form-data">
+            action="register.php" method="POST" enctype="multipart/form-data">
             <h1 class="h3 mb-3 fw-normal">Register</h1>
             <?php if ($firstError): ?>
                 <div class="alert alert-danger">
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     required
                     name="photo" 
                     @change="fileChosen"
-                    class="form-control" id="floatingInput" placeholder="Juan">
+                    class="form-control" id="floatingInput">
                 <label for="floatingInput">Photo</label>
             </div>
             <div class="form-floating">

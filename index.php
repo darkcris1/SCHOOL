@@ -14,15 +14,17 @@
     <div class="container">
       <article>
         <h2>
-          This is the main content of my landing page.
+          Welcome to SOCIALMEDYAS
         </h2>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque blanditiis, eveniet consequatur molestiae
-          voluptas eius eos, tempore pariatur id ab qui odit accusamus minima corrupti, sapiente corporis voluptatibus
-          dolorem voluptates.</p>
+        <p>
+          Connect, share, and explore the world of social media with Socialmedyas. Discover new friends, follow your favorite influencers, and stay up-to-date with the latest trends. Engage in lively discussions, share your thoughts, and express yourself through posts, photos, and videos. With Socialmedyas, your social media experience has never been more vibrant and connected.
+        </p>
   
-          <button class="btn btn-primary">
+          <a 
+            href="/login.php"
+            class="btn btn-primary">
             Get Started
-          </button>
+          </a>
       </article>
       <div>
           <figure> 
