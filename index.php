@@ -4,7 +4,7 @@
 <head>
   <?php include 'components/default-head.php' ?>
   <link rel="stylesheet" href="./css/index.css">
-  <title>SocialYes</title>
+  <title>SocialMedyas</title>
 </head>
 
 <body>
