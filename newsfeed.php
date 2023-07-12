@@ -92,7 +92,7 @@ include 'commons/required_login.php';
                             <small class="text-muted" x-text="post.created_at">Today 4:21 pm - 12.06.2014</small>
                             <template x-if="post.type == 1">
                                 <div class="badge bg-primary d-inline-block">
-                                    Promotions
+                                    Promotion
                                 </div>
                             </template>
                             <template x-if="post.type == 2">
