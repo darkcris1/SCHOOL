@@ -68,6 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Display errors to the user or take appropriate action
         $firstError = reset($errors);
     }
+} else {
+    include "commons/redirect_if_auth.php";
+   
 }
 ?>
 
