@@ -11,6 +11,15 @@ main .container {
     align-items: center;
 }
 
+
+@media screen and (max-width: 771px) {
+    main .container {
+        grid-template-columns: 1fr;
+    }
+    main .container > div {
+        order: -1;
+    }
+}
 main figure{
     width: 100%;
     min-width: 300px;
