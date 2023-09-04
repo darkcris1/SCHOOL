@@ -1,0 +1,10 @@
+*.class
+/others
+
+*.out
+
+*.vscode
+
+venv/
+
+highest_score.txt
