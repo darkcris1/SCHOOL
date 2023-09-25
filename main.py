@@ -93,6 +93,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
         self.image = random.choice(Enemy.enemy_images)
         self.image = pygame.transform.scale(self.image, (50, 50))
+        self.image = pygame.transform.rotate(self.image, 180)
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, SCREEN_WIDTH - self.rect.width)
         self.rect.y = random.randint(-100, -50)
@@ -271,12 +272,19 @@ def game_loop():
                 bullets_group.add(bullet)
                 shooting_sound.play()
                 last_shot_time = current_time
-
+            
             # Update bullets
             bullets_group.update()
 
             # Update enemies
             enemies_group.update()
+            
+            # Check for collisions between player and enemies
+            player_enemy_collisions = pygame.sprite.spritecollide(player_sprite, enemies_group, True)
+
+            # If a collision occurs, decrease lifelines and remove the enemy sprite
+            if player_enemy_collisions:
+                lifelines -= 1
 
             # Spawn new enemies
             while len(enemies_group) < level_enemy_count:
@@ -292,7 +300,6 @@ def game_loop():
             for enemy in enemies_group:
                 if enemy.rect.top > SCREEN_HEIGHT:
                     lifelines -= 1
-                    print(1)
                     enemies_group.remove(enemy)
 
             # Update player
@@ -324,6 +331,7 @@ def game_loop():
             if lifelines <= 0:
                 game_state = MENU
                 lifelines, score = 5, 0
+                enemies_group.empty()
         
         # Save highest score to file
         with open("highest_score.txt", "w") as file:
