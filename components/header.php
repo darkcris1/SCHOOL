@@ -21,6 +21,9 @@ session_start();
         <li class="nav-item">
           <a class="nav-link" href="/contact.php">Contact</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sakila_queries.php">Sakila</a>
+        </li>
 
         <?php 
           if (!$_SESSION['isAuth']) {
