@@ -1,0 +1,5 @@
+*/
+!.gitignore
+!public/
+!**/profile/
+!public/profile/defaultProfile.png

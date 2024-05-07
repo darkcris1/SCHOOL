@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  laravel:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    volumes:
+      - storage:/app/storage
+      - public_storage:/app/public/storage
+    env_file:
+      - .env
+    links:
+      - mysql
+    networks:
+      - laravel
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: your_database_name
+      MYSQL_USER: your_database_user
+      MYSQL_PASSWORD: your_database_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  storage:
+  public_storage:
