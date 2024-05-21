@@ -12,10 +12,10 @@
 
 /* CSS Variables */
 :root {
-    --brand-color: #00bfa6;
+    --brand-color: #ff8b17;
     --linear-back: Linear-gradient(180deg,
-            rgba(34, 193, 195, 1) 0%,
-            rgba(0, 191, 92, 1) 100%);
+            rgb(255, 171, 44) 0%,
+            rgb(235, 208, 100) 100%);
 }
 
 a {
@@ -66,7 +66,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
+    object-position: 50px 0px;
 }
 
 .sidebar_container .image .right_image_box {

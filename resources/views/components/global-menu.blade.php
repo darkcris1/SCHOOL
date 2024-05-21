@@ -1,6 +1,6 @@
  <!-- Global Menu -->
  <div id="global_menu_button_container">
-    <p class="site_title">John Roe</p>
+    <p class="site_title">Cris Fandino</p>
     <i class="fa fa-bars" id="global_menu_button"></i>
 </div>
 
@@ -23,7 +23,7 @@
 <div class="sidebar_container">
     <!-- Sidebar Image -->
     <div class="image">
-        <img src="img/profile.png" alt="John Roe">
+        <img src="img/profile.png" alt="Cris Fandino">
         <div class="right_image_box"></div>
         <div class="left_image_box"></div>
     </div>

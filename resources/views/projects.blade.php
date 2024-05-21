@@ -35,38 +35,24 @@
                 <div class="blogs_container">
                     <!-- Single Blog -->
                     <div class="blog_box">
-                        <h2 class="blog_title">This is the Title of my first blog</h2>
-                        <p class="blog_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo
-                            consequuntur esse? Soluta molestias vitae, obcaecati libero ullam cupiditate amet temporibus
-                            repudiandae voluptatem delectus vero dicta ducimus dolor similique nisi.</p>
-                        <img src="img/blog1.jpg" alt="Blog 1" class="blog_image">
-                        <p class="blog_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo
-                            consequuntur esse? Soluta molestias vitae, obcaecati libero ullam cupiditate amet temporibus
-                            repudiandae voluptatem delectus vero dicta ducimus dolor similique nisi.</p>
+                        <h2 class="blog_title">Calert</h2>
+                        <p class="blog_text">calert stands for custom-alert and it's a lighweight alternative for sweetalert and native dialogs with less than 9kb size</p>
+                        <img src="img/projects/calert.png" alt="Blog 1" class="blog_image">
                     </div>
 
                     <!-- Single Blog -->
                     <div class="blog_box">
-                        <h2 class="blog_title">This is the Title of my second blog</h2>
-                        <p class="blog_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo
-                            consequuntur esse? Soluta molestias vitae, obcaecati libero ullam cupiditate amet temporibus
-                            repudiandae voluptatem delectus vero dicta ducimus dolor similique nisi.</p>
-                        <img src="img/blog2.jpg" alt="Blog 2" class="blog_image">
-                        <p class="blog_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo
-                            consequuntur esse? Soluta molestias vitae, obcaecati libero ullam cupiditate amet temporibus
-                            repudiandae voluptatem delectus vero dicta ducimus dolor similique nisi.</p>
+                        <h2 class="blog_title">Json-Msg-React</h2>
+                        <p class="blog_text">JSON-MSG is a lightweight alternative for Joi or Yup or any json validator. Unlike Joi, json-msg focused only on error messages and validations</p>
+                        <img src="img/projects/json-msg-react.png" alt="Blog 1" class="blog_image">
                     </div>
 
                     <!-- Single Blog -->
                     <div class="blog_box">
-                        <h2 class="blog_title">This is the Title of my third blog</h2>
-                        <p class="blog_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo
-                            consequuntur esse? Soluta molestias vitae, obcaecati libero ullam cupiditate amet temporibus
-                            repudiandae voluptatem delectus vero dicta ducimus dolor similique nisi.</p>
-                        <img src="img/blog3.jpg" alt="Blog 3" class="blog_image">
-                        <p class="blog_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo
-                            consequuntur esse? Soluta molestias vitae, obcaecati libero ullam cupiditate amet temporibus
-                            repudiandae voluptatem delectus vero dicta ducimus dolor similique nisi.</p>
+                        <h2 class="blog_title">E-SUDOKU</h2>
+                        <p class="blog_text">An online sudoku game with accessible buttons and helpers for hints and errors detection.</p>
+                        <img src="img/projects/esudoku.png" alt="Blog 1" class="blog_image">
+              
                     </div>
                 </div>
             </div>

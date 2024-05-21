@@ -30,17 +30,35 @@
             <!-- Contact Page -->
             <div class="contact_page">
                 <h2 class="title">Contact <span>Me</span></h2>
+                @if(session('success'))
+                <div style="color: green;">
+                    {{ session('success') }}
+                </div>
+            @endif
                 <hr class="line">
                 <div class="contact_container">
-                    <form action="post">
+                    <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
                         <label>Namme</label>
-                        <input type="email" name="name" id="" required placeholder="Enter Email">
+                        <input type="text" name="name" id="" required placeholder="Enter name">
+                        @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <label>Email</label>
                         <input type="email" name="email" id="" required placeholder="Enter Email">
+                        @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <label>Subject</label>
                         <input type="text" name="subject" id="" required placeholder="Enter Subject">
+                        @error('subject')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <label>Message</label>
                         <textarea name="message" id="" cols="30" rows="10" required placeholder="Enter Message"></textarea>
+                        @error('message')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <input type="submit" value="Send" id="send_button">
                     </form>
                 </div>

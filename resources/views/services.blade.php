@@ -37,22 +37,19 @@
                     <div class="services_box">
                         <i class="fas fa-tablet-alt"></i>
                         <h3 class="services_title">App Development</h3>
-                        <p class="services_text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-                            nobis. Lorem ipsum dolor sit amet. </p>
+                        <p class="services_text">We create user-friendly mobile apps with seamless experiences and robust features. </p>
                     </div>
                     <div class="services_box">
                         <i class="fas fa-globe"></i>
                         <h3 class="services_title">Website Development</h3>
-                        <p class="services_text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-                            nobis. Lorem ipsum dolor sit amet. </p>
+                        <p class="services_text">We design stunning, high-performance websites tailored to your brand.</p>
                     </div>
                 </div>
                 <div class="services_container">
                     <div class="services_box">
                         <i class="fas fa-globe"></i>
                         <h3 class="services_title">Backend Development</h3>
-                        <p class="services_text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-                            nobis. Lorem ipsum dolor sit amet. </p>
+                        <p class="services_text">We build secure and scalable backend solutions for your business needs.</p>
                     </div>
                 </div>
             </div>
