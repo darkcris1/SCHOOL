@@ -1,0 +1,15 @@
+/* Optional: Add your custom styles for navbar */
+.navbar {
+    background-color: #f8f9fa;
+    /* You can change the navbar background color */
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #000;
+    /* Customize link color */
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #007bff;
+    /* Customize hover color */
+}

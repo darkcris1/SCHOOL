@@ -1,0 +1,28 @@
+import { Routes } from '@angular/router';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AlreadyLoginGuard, AuthGuard } from './auth.guard';
+
+export const routes: Routes = [
+    {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [AlreadyLoginGuard]
+    },
+    {
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [AlreadyLoginGuard]
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard], // Protect the route with the function-based guard
+    },
+    {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/login',
+    },
+];

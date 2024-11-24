@@ -1,0 +1,110 @@
+<div 
+  style="min-height: 80vh;"
+  class="container d-flex justify-content-center align-items-center">
+    <div class="card shadow-sm mt-3" style="width: 100%; max-width: 400px;">
+      <div class="card-body">
+        <h4 class="card-title text-center">Register</h4>
+  
+        <!-- General error message -->
+        <div *ngIf="registerError" class="alert alert-danger">
+          {{ registerError }}
+        </div>
+  
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              id="username"
+              formControlName="username"
+              type="text"
+              class="form-control"
+              [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched || fieldErrors['username']"
+            />
+            <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="invalid-feedback">
+              Username is required.
+            </div>
+            <!-- Field-specific errors for username -->
+            <div *ngIf="fieldErrors['username']" class="invalid-feedback">
+              <div *ngFor="let error of fieldErrors['username']">
+                {{ error }}
+              </div>
+            </div>
+          </div>
+  
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              id="email"
+              formControlName="email"
+              type="email"
+              class="form-control"
+              [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched || fieldErrors['email']"
+            />
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="invalid-feedback">
+              Please enter a valid email address.
+            </div>
+            <!-- Field-specific errors for email -->
+            <div *ngIf="fieldErrors['email']" class="invalid-feedback">
+              <div *ngFor="let error of fieldErrors['email']">
+                {{ error }}
+              </div>
+            </div>
+          </div>
+  
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              id="password"
+              formControlName="password"
+              type="password"
+              class="form-control"
+              [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched || fieldErrors['password']"
+            />
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="invalid-feedback">
+              Password is required (min 6 characters).
+            </div>
+            <!-- Field-specific errors for password -->
+            <div *ngIf="fieldErrors['password']" class="invalid-feedback">
+              <div *ngFor="let error of fieldErrors['password']">
+                {{ error }}
+              </div>
+            </div>
+          </div>
+  
+          <!-- Confirm Password -->
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <input
+              id="confirm_password"
+              formControlName="confirm_password"
+              type="password"
+              class="form-control"
+              [class.is-invalid]="registerForm.get('confirm_password')?.invalid && registerForm.get('confirm_password')?.touched || fieldErrors['confirm_password']"
+            />
+            <div *ngIf="registerForm.get('confirm_password')?.invalid && registerForm.get('confirm_password')?.touched" class="invalid-feedback">
+              Please confirm your password.
+            </div>
+            <!-- Field-specific errors for confirm_password -->
+            <div *ngIf="fieldErrors['confirm_password']" class="invalid-feedback">
+              <div *ngFor="let error of fieldErrors['confirm_password']">
+                {{ error }}
+              </div>
+            </div>
+          </div>
+  
+          <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">
+            Register
+          </button>
+        </form>
+  
+        <!-- Login Link -->
+        <div class="mt-3 text-center">
+          <p>Already have an account? <a routerLink="/login" class="link-primary">Login here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

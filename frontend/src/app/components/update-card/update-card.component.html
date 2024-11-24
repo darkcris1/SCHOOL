@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h4 class="modal-title">Update Card</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="updateForm">
+      <!-- Title -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          type="text"
+          class="form-control"
+          formControlName="title"
+          placeholder="Enter title"
+        />
+      </div>
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          rows="3"
+          class="form-control"
+          formControlName="description"
+          placeholder="Enter description"
+        ></textarea>
+      </div>
+      <!-- Status -->
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select id="status" class="form-select" formControlName="status">
+          <option value="todo">Todo</option>
+          <option value="wip">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <!-- Assignee -->
+      <div class="mb-3">
+        <label for="assignee" class="form-label">Assignee</label>
+        <select id="assignee" class="form-select" formControlName="assignee">
+          <option *ngFor="let user of users" [value]="user.id">{{ user.username }}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="updateForm.invalid" (click)="save()">Save</button>
+  </div>
+  

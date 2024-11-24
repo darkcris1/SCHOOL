@@ -1,0 +1,88 @@
+<div class="container mt-5">
+  <h3 class="mb-4 d-flex justify-content-between">
+    Tickets
+    <button class="btn btn-primary" (click)="createCard()">
+      <i class="ph ph-plus-circle me-2"></i> Create
+    </button>
+  </h3>
+
+  <!-- Search Bar -->
+  <div [formGroup]="form" class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      [formControlName]="'search'"
+      placeholder="Search tickets by title or description..."
+    />
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Assignee</th>
+        <th>Updated At</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let card of cards; let i = index">
+        <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+        <td>{{ card.title }}</td>
+        <td>{{ card.description }}</td>
+        <td>
+          <status-badge [status]="card.status"></status-badge>
+        </td>
+        <td>
+          <img [src]="card.assignee.photo" alt="Assignee Avatar" class="rounded-circle me-2" style="width: 24px; height: 24px;">
+          {{ card.assignee.username }}
+        </td>
+        <td>{{ card.updated_at | date: 'short' }}</td>
+        <td>
+          <!-- ngbDropdown for Actions -->
+          <div 
+            ngbDropdown 
+            placement="bottom-right"
+            container="body"
+            class="d-inline-block">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              id="dropdownMenuButton"
+              ngbDropdownToggle>
+              <i class="ph ph-dots-three-vertical"></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button class="dropdown-item" (click)="updateCard(card)">Update</button>
+              <button class="dropdown-item text-danger" (click)="deleteCard(card.id)">Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      @if (isLoading) {
+        <div class="p-2">
+          Loading....
+        </div>
+      }
+      @if (!isLoading && cards.length === 0) {
+        <div class="p-2">
+          No tickets found.
+        </div>
+      }
+    </tbody>
+  </table>
+
+  <div class="mt-3"></div>
+  <ngb-pagination
+    [collectionSize]="cards.length"
+    [(page)]="currentPage"
+    [pageSize]="pageSize"
+    [maxSize]="5"
+    [boundaryLinks]="true"
+    [rotate]="true"
+    aria-label="Pagination">
+  </ngb-pagination>
+</div>
