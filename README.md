@@ -1,16 +1,16 @@
-## GreenWarriors Ticket Card App
+# GreenWarriors Ticket Card App
 
 - copy the **.env.sample** to **.env**
 
 
-## Backend Django Project
+### Backend Django Project
 ```bash
 cd django_project
 docker-compose up -d
 ```
 
 
-## FrontEnd Django Project
+### FrontEnd Django Project
 ```bash
 cd frontend
 npm i --force
